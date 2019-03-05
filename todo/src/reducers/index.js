@@ -1,16 +1,28 @@
 
 import { ADD_TODO } from '../actions';
 
-const initialState = { todos: [] };
+const initialState = { 
+    todos: [
+        {heading: "taskOne", description: "this is the first task", id: Date.now()}
+    ] 
+};
 
-export const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
+
         case ADD_TODO:
+            const newTodo = {
+                ...action.payload,
+                id: Date.now()
+            }
             return {
                 ...state,
-                todos: state.todos.push(action.payload)
+                todos: [...state.todos, action.payload]
             };
+
         default: 
             return state;
     }
 }
+
+export default reducer;
